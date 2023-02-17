@@ -29,6 +29,7 @@ def drawrec(v1,v2,color):
 
 def clear():
     C.delete("all")
+    drawrec([0, 0],screensize,"black")
 
 def recalculate():
     global running
@@ -39,22 +40,22 @@ def recalculate():
     running = True
     #draw button in top right
     global screensize
-    drawrec([screensize[0] - 51, 2],[screensize[0] + 1, 52],"black")
+    drawrec([screensize[0] - 57, 6],[screensize[0] - 4, 56],"white")
     #draw lines used for editing but only if they are enabled
     global show_lines
     if show_lines:
         i = 0
         while i < len(points) - 1:
             #lines amd dots
-            drawcircle(pointModifiers[i][0],"black",5,2,[i,0])
-            drawline(pointModifiers[i][0],points[i],"black")
+            drawcircle(pointModifiers[i][0],"white",5,2,[i,0])
+            drawline(pointModifiers[i][0],points[i],"white")
             if i % 2 == 0:
                 drawcircle(points[i],"blue",5,1,i)
             drawline(points[i],points[i + 1],"blue")
             if i == len(points) or i % 2 == 0:
                 drawcircle(points[i + 1],"blue",5,1,i + 1)
-            drawline(points[i + 1],pointModifiers[i][1],"black")
-            drawcircle(pointModifiers[i][1],"black",5,2,[i,1])
+            drawline(points[i + 1],pointModifiers[i][1],"white")
+            drawcircle(pointModifiers[i][1],"white",5,2,[i,1])
             i = i + 1
     #check if screen needs to be refreshed again
     if needs_to_be_called:
@@ -211,6 +212,7 @@ root = Tk()
 C = Canvas(root,bg="white",height=screensize[0],width=screensize[1])
 
 #call main code
+clear()
 recalculate()
 root.bind("<Motion>",updateMouse)
 root.bind("<Button-1>",select)
